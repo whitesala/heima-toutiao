@@ -37,13 +37,14 @@ export default {
         // 手机号码
         mobile: '',
         // 密码
-        code: ''
+        code: '' // 统一为246810
+
       },
       rules: {
         // 需满足以下两个验证才能通过
         mobile: [
-          { required: true, message: '请填写手机号码', trigger: 'onBlur' }
-          // { pattern: /^1\d{10}$/, message: '请填写正确的手机号', trigger: 'onBlur' }
+          { required: true, message: '请填写手机号码', trigger: 'onBlur' },
+          { pattern: /^1\d{10}$/, message: '请填写正确的手机号', trigger: 'onBlur' }
         ],
         code: [{ required: true, message: '请填写正确的密码', trigger: 'onBlur' }]
       }
@@ -75,4 +76,9 @@ export default {
 .login-container{
   padding-top: 46px;
 }
+
+// .van-field input::-webkit-input-placeholder {
+//   color: #909399 !important;
+//   opacity: 1 !important;
+// }
 </style>

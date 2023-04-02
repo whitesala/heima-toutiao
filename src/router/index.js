@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { myGetItem } from '@/utils/storage'
 
 // 导入的外部的路由组件
 import Login from '@/views/Login/HMLogin.vue'
@@ -18,6 +19,15 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.path === '/home') {
+    const token = myGetItem('state')
+    token ? next() : next('/login')
+  } else {
+    next()
+  }
 })
 
 export default router

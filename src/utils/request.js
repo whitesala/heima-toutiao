@@ -24,4 +24,6 @@ requests.interceptors.request.use(
   // 错误时抛出错误（还没有发出），这里使用function需要加上return
   error => Promise.reject(error)
 )
+
+// 将requests共享出去
 export default requests
