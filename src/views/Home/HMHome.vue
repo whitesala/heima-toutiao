@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       // 默认激活显示的为第一个
-      active: 1,
+      active: 0,
       // 定义用户分类频道列表，接收API传来的值
       userChannel: []
     }
