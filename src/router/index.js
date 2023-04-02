@@ -23,12 +23,26 @@ const routes = [
       // path 为"空字符串"的子路由规则，叫做"默认子路由"
       { path: '', component: Home, name: 'home' },
       { path: 'user', component: User, name: 'user' }
-    ]
+    ],
+    meta: {
+      // 主要的目的是记录进度条与顶部的位置,isRecord没有实际使用意义
+      isRecord: true,
+      top: 0
+    }
   }
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  // 控制页面的滚动行为
+  scrollBehavior(to, from, savedPosition) {
+    // 将记录的滚动条距离顶部的位置return出去
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: to.meta.top || 0 }
+    }
+  }
 })
 
 router.beforeEach((to, from, next) => {

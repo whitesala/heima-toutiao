@@ -17,7 +17,7 @@ requests.interceptors.request.use(
     // 判断tokenStr是否为空
     // 若是非空则为为这次请求的请求头添加 Authorization 身份认证字段
     if (tokenStr) config.headers.Authorization = `Bearer ${tokenStr}`
-    console.log(config)
+    // console.log(config)
     // 记得需要return，否则程序还会继续往下执行
     return config
   },

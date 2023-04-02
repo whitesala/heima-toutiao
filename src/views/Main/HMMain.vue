@@ -1,7 +1,11 @@
 <template>
   <div>
     <!-- 组件内容展示 -->
-    <router-view></router-view>
+    <!-- 使用keep-alive保持主页的状态,include里的名称是组件里面的name -->
+    <keep-alive include="HMHome">
+      <router-view></router-view>
+    </keep-alive>
+
     <!-- 底部的 TabBar -->
     <van-tabbar route>
       <van-tabbar-item icon="home-o" to="/home">首页</van-tabbar-item>
