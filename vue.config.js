@@ -1,6 +1,6 @@
 // 导入path核心模块
 const path = require('path')
-const navPath = path.join(__dirname, './src/nav.less')
+const coverPath = path.join(__dirname, './src/assets/cover.less')
 const { defineConfig } = require('@vue/cli-service')
 
 module.exports = defineConfig({
@@ -11,7 +11,7 @@ module.exports = defineConfig({
         lessOptions: {
           modifyVars: {
           // 通过外部less文件覆盖默认样式
-            hack: `true; @import"${navPath}";`
+            hack: `true; @import"${coverPath}";`
           }
         }
       }
