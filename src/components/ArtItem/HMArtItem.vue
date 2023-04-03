@@ -109,7 +109,7 @@ export default {
         this.$emit('remove-article', this.artId)
         this.show = false
         console.log('举报成功!')
-        // this.showPop = true
+        this.$notify({ type: 'success', message: '举报文章成功', duration: 1000 })
       }
     }
   },
