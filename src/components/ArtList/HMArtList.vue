@@ -7,7 +7,8 @@
         <!-- :offset="5"表示当滚动条距离底部小于多少时触发上拉加载的onLoad事件 -->
         <van-list v-model="loading" :finished="finished" loading-text="今天也有很努力的加载喔~" error-text="呜呜呜~好像出错了QAQ" finished-text="到底啦~已经没有更多了-__-||" @load="onLoad" :immediate-check="false" :offset="5">
           <!-- 将整个文章的数组传到ArtItem的组件里面 -->
-          <ArtItem v-for="item in artList" :key="item.id" :article="item"></ArtItem>
+          <ArtItem v-for="item in artList" :key="item.id" :article="item" @remove-article="removeArticle
+          "></ArtItem>
         </van-list>
       </van-pull-refresh>
 
@@ -37,9 +38,11 @@ export default {
       refreshing: false // 是否处于下拉刷新的状态
     }
   },
+
   components: {
     ArtItem
   },
+
   props: {
     channelId: {
       type: Number,
@@ -110,6 +113,18 @@ export default {
       // options里的trailing选项,true表示结束后调用
       { trailing: true }
       )
+    },
+
+    // 接收到子组件移除文章的请求
+    removeArticle(id) {
+      // 使用filter过滤移除数组
+      // 炸楼操作
+      this.artList = this.artList.filter(item => item.art_id.toString() !== id)
+      // 判页面剩余文章数量是否小于10,小于10则主动请求下一页数据
+      if (this.artList.length < 10) {
+        this.initArtList()
+        console.log('主动请求了下一页的文章,请求数量:')
+      }
     }
   }
 }

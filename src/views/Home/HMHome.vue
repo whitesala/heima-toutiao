@@ -20,7 +20,7 @@
     <van-tabs v-model="active" sticky offset-top="1.22666667rem">
       <van-tab v-for="item in userChannel" :key="item.id" :title="item.name">
 
-        <!-- 文章列表模块 -->
+        <!-- 文章频道列表模块 -->
         <keep-alive include="ArtList">
           <ArtList :channelId="item.id"></ArtList>
         </keep-alive>
