@@ -21,7 +21,7 @@
           <span>{{ article.aut_name }} &nbsp;&nbsp; {{ article.comm_count }}评论 &nbsp;&nbsp; {{ article.pubdate | dateFormat }}</span>
           <!-- 关闭按钮 -->
           <!-- 使用.stop阻止点击事件的冒泡，文章后续要做点击的操作 -->
-          <van-icon name="cross" @click.stop="show = true" />
+          <van-icon name="ellipsis" @click.stop="show = true" />
         </div>
       </template>
     </van-cell>
@@ -66,7 +66,6 @@ export default {
     return {
       // 将反馈动态面的展示板默认设置为false
       show: false,
-      // showPop: false,
       // 定义反馈面板的一些可选项
       actions: [
         { name: '不感兴趣' },
@@ -109,7 +108,8 @@ export default {
         this.$emit('remove-article', this.artId)
         this.show = false
         console.log('举报成功!')
-        this.$notify({ type: 'success', message: '举报文章成功', duration: 1000 })
+        // 举报成功后提示消息
+        this.$notify({ type: 'success', message: '举报文章成功', duration: 2000, background: 'red' })
       }
     }
   },

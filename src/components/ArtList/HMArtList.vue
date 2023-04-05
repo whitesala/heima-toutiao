@@ -65,7 +65,7 @@ export default {
     // isRefresh用来判断是出于上拉加载还是下拉刷新的状态
     async initArtList(isRefresh) {
       const { data: res } = await getArtListAPI(this.channelId, this.timestamp)
-      console.log(res)
+      // console.log(res)
       if (res.message === 'OK') {
         // 接收文章列表和时间戳
         this.timestamp = res.data.pre_timestamp

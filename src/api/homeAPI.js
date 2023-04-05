@@ -31,3 +31,15 @@ export const reportArtAPI = (targetId, type, remark) => {
     remark: remark
   })
 }
+
+// 获取所有频道分类列表的API
+export const getAllChannelAPI = () => {
+  return homeRequest.get('/v1_0/channels')
+}
+
+// 将用户的频道分类数据存储到数据库
+export const updateUserChannelAPI = channels => {
+  return homeRequest.put('/v1_0/user/channels', {
+    channels
+  })
+}
