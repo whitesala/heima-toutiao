@@ -1,5 +1,6 @@
 <template>
-    <div>
+  <!-- 每个文章根据其id点击后跳转详情页 -->
+    <div @click="$router.push('/article/' + artId)">
     <van-cell>
       <!-- 标题区域的插槽 -->
       <template #title>

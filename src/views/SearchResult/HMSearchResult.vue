@@ -45,6 +45,7 @@ export default {
     ArtItem
   },
   created() {
+    // 调用初始化请求搜索列表的方法
     this.initSearchResultList()
   },
   methods: {

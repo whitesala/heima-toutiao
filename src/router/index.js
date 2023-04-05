@@ -9,6 +9,7 @@ import Home from '@/views/Home/HMHome.vue'
 import User from '@/views/User/HMUser.vue'
 import Search from '@/views/Search/HMSearch.vue'
 import SearchResult from '@/views/SearchResult/HMSearchResult.vue'
+import ArticleDetail from '@/views/ArticleDetail/HMArticleDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -35,9 +36,12 @@ const routes = [
   // 搜索组件的路由规则
   { path: '/search', component: Search, name: 'search' },
   // 搜索结果组件的路由规则
-  { path: '/search/:kw', component: SearchResult, name: 'search-result', props: true }
+  { path: '/search/:kw', component: SearchResult, name: 'search-result', props: true },
+  // 文章详情页的路由规则
+  { path: '/article/:id', component: ArticleDetail, name: 'article-detail', props: true }
 ]
 
+// 实例化路由对象
 const router = new VueRouter({
   routes,
   // 控制页面的滚动行为
@@ -51,6 +55,7 @@ const router = new VueRouter({
   }
 })
 
+// 全局前置守卫
 router.beforeEach((to, from, next) => {
   if (to.path === '/home') {
     const token = myGetItem('state')
