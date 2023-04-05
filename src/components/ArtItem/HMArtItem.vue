@@ -21,7 +21,7 @@
           <span>{{ article.aut_name }} &nbsp;&nbsp; {{ article.comm_count }}评论 &nbsp;&nbsp; {{ article.pubdate | dateFormat }}</span>
           <!-- 关闭按钮 -->
           <!-- 使用.stop阻止点击事件的冒泡，文章后续要做点击的操作 -->
-          <van-icon name="ellipsis" @click.stop="show = true" />
+          <van-icon name="ellipsis" @click.stop="show = true" v-if="closeable"/>
         </div>
       </template>
     </van-cell>
@@ -60,6 +60,11 @@ export default {
     article: {
       type: Object,
       required: true
+    },
+    // 文章的反馈按钮是否展示
+    closeable: {
+      type: Boolean,
+      default: true
     }
   },
   data() {

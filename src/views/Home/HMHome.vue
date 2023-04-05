@@ -10,8 +10,9 @@
       </template>
 
       <!-- 右侧搜索 -->
+      <!-- 使用编码式导航API：$router.push('/search')跳转到搜索页 -->
       <template #right>
-        <van-icon name="search" color="black" size="18" />
+        <van-icon name="search" color="black" size="18" @click="$router.push('/search')"/>
       </template>
     </van-nav-bar>
 

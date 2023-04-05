@@ -7,6 +7,8 @@ import Login from '@/views/Login/HMLogin.vue'
 import Main from '@/views/Main/HMMain.vue'
 import Home from '@/views/Home/HMHome.vue'
 import User from '@/views/User/HMUser.vue'
+import Search from '@/views/Search/HMSearch.vue'
+import SearchResult from '@/views/SearchResult/HMSearchResult.vue'
 
 Vue.use(VueRouter)
 
@@ -29,7 +31,11 @@ const routes = [
       isRecord: true,
       top: 0
     }
-  }
+  },
+  // 搜索组件的路由规则
+  { path: '/search', component: Search, name: 'search' },
+  // 搜索结果组件的路由规则
+  { path: '/search/:kw', component: SearchResult, name: 'search-result', props: true }
 ]
 
 const router = new VueRouter({
