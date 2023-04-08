@@ -10,6 +10,7 @@ import User from '@/views/User/HMUser.vue'
 import Search from '@/views/Search/HMSearch.vue'
 import SearchResult from '@/views/SearchResult/HMSearchResult.vue'
 import ArticleDetail from '@/views/ArticleDetail/HMArticleDetail.vue'
+import UserEdit from '@/views/userEdit/HMUserEdit.vue'
 
 Vue.use(VueRouter)
 
@@ -38,7 +39,9 @@ const routes = [
   // 搜索结果组件的路由规则
   { path: '/search/:kw', component: SearchResult, name: 'search-result', props: true },
   // 文章详情页的路由规则
-  { path: '/article/:id', component: ArticleDetail, name: 'article-detail', props: true }
+  { path: '/article/:id', component: ArticleDetail, name: 'article-detail', props: true },
+  // 编辑用户信息的组件路由规则
+  { path: '/user/edit', component: UserEdit, name: 'user-edit' }
 ]
 
 // 实例化路由对象
