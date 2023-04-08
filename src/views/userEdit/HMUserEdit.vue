@@ -21,7 +21,7 @@
     <!-- 修改用户名称的对话框 -->
     <van-dialog v-model="showNameDialog" title="修改名称" show-cancel-button :before-close="beforeClose">
       <!-- input-align 文本横向的对其方式 -->
-      <van-field v-model.trim="name" placeholder="请输入用户名" input-align="center" maxlength="7" ref="nameRef"/>
+      <van-field v-model.trim="name" placeholder="请输入用户名" input-align="center" maxlength="11" ref="nameRef"/>
     </van-dialog>
 
     <!-- 修改用户生日的对话框 -->
@@ -168,7 +168,7 @@ export default {
       if (action === 'cancel') return done()
 
       // 判断输入是否合法
-      if (this.name === '' || this.name.length > 7) {
+      if (this.name === '' || this.name.length > 11) {
         this.$notify({
           type: 'warning',
           message: '名称的长度需要在1-7个字符之间，请重新输入！',

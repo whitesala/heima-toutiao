@@ -11,6 +11,7 @@ import Search from '@/views/Search/HMSearch.vue'
 import SearchResult from '@/views/SearchResult/HMSearchResult.vue'
 import ArticleDetail from '@/views/ArticleDetail/HMArticleDetail.vue'
 import UserEdit from '@/views/userEdit/HMUserEdit.vue'
+import ChatRobot from '@/views/ChatRobot/HMChatRobot.vue'
 
 Vue.use(VueRouter)
 
@@ -41,7 +42,9 @@ const routes = [
   // 文章详情页的路由规则
   { path: '/article/:id', component: ArticleDetail, name: 'article-detail', props: true },
   // 编辑用户信息的组件路由规则
-  { path: '/user/edit', component: UserEdit, name: 'user-edit' }
+  { path: '/user/edit', component: UserEdit, name: 'user-edit' },
+  // 机器人聊天的界面
+  { path: '/user/chat-robot', component: ChatRobot, name: 'chat-robot' }
 ]
 
 // 实例化路由对象

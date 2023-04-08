@@ -69,7 +69,10 @@ export default new Vuex.Store({
   },
 
   // 使用actions处理异步的请求
+  // Action 提交的是 mutation，而不是直接变更状态
+  // Action 可以包含任意异步操作
   actions: {
+    // ctx参数可以在Action中使用，它的主要作用是为了给开发者提供额外的功能或者叠加一些特殊条件或需求。它实际上是对store进行了一个封装，更方便我们调用Vuex store
     async initUserInfo(context) {
       const { data: res } = await getUserInfoAPI()
       if (res.message === 'OK') {
@@ -83,6 +86,23 @@ export default new Vuex.Store({
         // 将结果提交给mutations节点里的updateUserProfile方法
         context.commit('updateUserProfile', res.data)
       }
+    }
+  },
+
+  // 使用getters节点...getters可以认为是 store 的计算属性
+  getters: {
+    // 用户头像的计算属性
+    userAvatar(state) {
+      // 默认用户头像
+      let imgSrc = 'https://img.yzcdn.cn/vant/cat.jpeg'
+
+      // 如果用户信息中包含头像photo的属性,为imgSrc重新赋值
+      if (state.userInfo.photo) {
+        imgSrc = state.userInfo.photo
+      }
+
+      // 返回头像的地址信息
+      return imgSrc
     }
   }
 })
