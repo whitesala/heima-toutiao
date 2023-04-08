@@ -29,7 +29,7 @@ export default {
       searchResultList: [],
 
       // 是否正在进行加载
-      loading: false,
+      loading: true,
       // 是否完成所有数据加载
       finished: false
     }

@@ -39,12 +39,16 @@
         <van-button icon="good-job-o" type="danger" plain size="small" v-else @click="setLike">点赞</van-button>
       </div>
     </div>
+
+    <!-- 文章评论区域 -->
+    <ArtCmt :art-id="id"></ArtCmt>
   </div>
 </template>
 
 <script>
 // 按需导入文章详情页的API
 import { getArticleDetailAPI, setFollowAPI, setUnFollowAPI, setLikeAPI, setDislikeAPI } from '@/api/articleAPI'
+import ArtCmt from '@/components/ArtComment/HMArtComment.vue'
 
 export default {
   name: 'ArticleDetail',
@@ -53,6 +57,9 @@ export default {
       // 文章详情的信息对象
       articleDetail: null
     }
+  },
+  components: {
+    ArtCmt
   },
   // 文章id
   props: ['id'],
@@ -65,7 +72,7 @@ export default {
       // 请求文章详情数据
       const { data: res } = await getArticleDetailAPI(this.id)
       if (res.message === 'OK') {
-        console.log(res)
+        // console.log(res)
         this.articleDetail = res.data
       }
     },

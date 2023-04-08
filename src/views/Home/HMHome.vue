@@ -336,7 +336,9 @@ export default {
   background-color: #fafafa;
   margin: 6px;
 }
-
+.active{
+    color: red;
+  }
 .cross-badge {
   position: absolute;
   right: -3px;
