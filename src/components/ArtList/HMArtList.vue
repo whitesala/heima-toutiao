@@ -94,14 +94,12 @@ export default {
 
     // 上拉加载的监听函数
     onLoad() {
-      console.log('触发了上拉加载')
       // 重新调用初始化文章列表的函数渲染页面
       this.initArtList()
     },
 
     // 下拉刷新的监听函数
     onRefresh() {
-      console.log('触发了下拉刷新')
       this.initArtList(true)
     },
 
@@ -128,7 +126,6 @@ export default {
       // 判页面剩余文章数量是否小于10,小于10则主动请求下一页数据
       if (this.artList.length < 10) {
         this.initArtList()
-        console.log('主动请求了下一页的文章,请求数量:')
       }
     }
   }

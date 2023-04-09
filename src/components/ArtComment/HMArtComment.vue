@@ -123,7 +123,6 @@ export default {
         // 将文章偏移量设置为返回结果的last_id属性
         this.offset = res.data.last_id
 
-        console.log(res)
         // 下拉加载到的方式将新数据添加到旧数据后面
         // 使用数组的展开语法
         this.cmtList = [...this.cmtList, ...res.data.results]
@@ -158,7 +157,6 @@ export default {
 
     // 发布文章的监听事件
     async pubCmt() {
-      console.log(this.userCmt)
       const { data: res } = await pubCmtAPI(this.artId, this.userCmt)
       if (res.message === 'OK') {
         // 评论总数自动自加1

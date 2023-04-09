@@ -59,7 +59,6 @@ export default {
   mounted() {
     // 使用DOM获取搜索框
     const ipt = document.querySelector('input[type=search]')
-    console.log(ipt)
     // 搜索框自动获得焦点
     // 这里使用逻辑与操作符&&,如果ipt为真则执行后面的ipt.focus()
     // 对比||，如果改为ipt || ipt.focus()，那么就是当ipt不存在时执行后面的ipt.focus()，这里不符合当前的情况
@@ -94,7 +93,6 @@ export default {
 
       // 获取用户当前选中搜索建议项
       const kw = e.currentTarget.innerText
-      console.log(kw)
       // 跳转到搜索结果页
       this.$router.push('/search/' + kw)
     },

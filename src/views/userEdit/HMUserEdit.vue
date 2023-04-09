@@ -108,8 +108,6 @@ export default {
         // 提示用户更新头像成功
         this.$notify({ type: 'success', message: '更新头像成功', duration: 2000 })
       }
-      // 打印用户选择的第一个文件
-      console.log(files[0])
     },
 
     // 更新修改名字的请求
@@ -162,7 +160,6 @@ export default {
     // Dialog输入框关闭前触发的事件
     beforeClose(action, done) {
       // 这里的action代表可能值confirm和cancel，确认时confirm,取消时cancel
-      console.log(action)
 
       // 判断如果点击的是取消则直接关闭对话框
       if (action === 'cancel') return done()

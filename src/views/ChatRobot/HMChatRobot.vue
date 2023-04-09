@@ -88,8 +88,6 @@ export default {
 
       // 将用户填写的消息追加到数组chatList里面
       this.chatList.push({ name: 'user', msg: this.word })
-      // 打印输出用户填写的聊天内容
-      console.log(this.word)
       // 清空聊天框内容
       this.word = ''
     },

@@ -30,9 +30,6 @@ export default new Vuex.Store({
       // 将提交过来的payload对象作为tokenInfo的值
       state.tokenInfo = payload
 
-      // 测试state中是否有值
-      console.log(state)
-
       // 通过commit调用saveStateToStorage
       // 这里的this表示当前new出来的store实例化对象
       this.commit('saveStateToStorage')

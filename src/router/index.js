@@ -4,15 +4,18 @@ import VueRouter from 'vue-router'
 import store from '@/store/index'
 
 // 导入的外部的路由组件
-import Login from '@/views/Login/HMLogin.vue'
-import Main from '@/views/Main/HMMain.vue'
-import Home from '@/views/Home/HMHome.vue'
-import User from '@/views/User/HMUser.vue'
-import Search from '@/views/Search/HMSearch.vue'
-import SearchResult from '@/views/SearchResult/HMSearchResult.vue'
-import ArticleDetail from '@/views/ArticleDetail/HMArticleDetail.vue'
-import UserEdit from '@/views/userEdit/HMUserEdit.vue'
-import ChatRobot from '@/views/ChatRobot/HMChatRobot.vue'
+// 当打包构建应用时，JavaScript 包会变得非常大，影响页面加载。如果我们能把不同路由对应的组件分割成不同的代码块，然后当路由被访问的时候才加载对应组件，这样就会更加高效
+// import Login from '@/views/Login/Login.vue'
+// 对应修改原来导入路由的方式
+const Login = () => import('@/views/Login/HMLogin.vue')
+const Main = () => import('@/views/Main/HMMain.vue')
+const Home = () => import('@/views/Home/HMHome.vue')
+const User = () => import('@/views/User/HMUser.vue')
+const Search = () => import('@/views/Search/HMSearch.vue')
+const SearchResult = () => import('@/views/SearchResult/HMSearchResult.vue')
+const ArticleDetail = () => import('@/views/ArticleDetail/HMArticleDetail.vue')
+const UserEdit = () => import('@/views/userEdit/HMUserEdit.vue')
+const ChatRobot = () => import('@/views/ChatRobot/HMChatRobot.vue')
 
 Vue.use(VueRouter)
 

@@ -45,12 +45,9 @@ requests.interceptors.response.use(
 
     // 判断token是否过期
     if (error.response && error.response.status === 401 && tokenInfo.refresh_token) {
-      console.log('token过期啦！')
-
       try {
         // TODO: 发起请求，根据 refresh_token 重新请求一个有效的新 token
         const { data: res } = await exchangeTokenAPI(tokenInfo.refresh_token)
-        console.log(res)
 
         // TODO2：TODO: 更新 Store 中的 Token
         store.commit('updateTokenInfo', { token: res.data.token, refresh_token: tokenInfo.refresh_token })

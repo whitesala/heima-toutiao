@@ -89,7 +89,6 @@ export default {
   methods: {
     async onCellClick(name) {
       if (name === '不感兴趣') {
-        console.log('不感兴趣')
         // 调用API接口,将文章设置不感兴趣
         const { data: res } = await dislikeArtAPI(this.artId)
         if (res.message === 'OK') {
@@ -98,7 +97,6 @@ export default {
         }
         this.show = false
       } else if (name === '拉黑作者') {
-        console.log('拉黑作者')
         this.show = false
       } else if (name === '反馈垃圾内容') {
         // 展示二级反馈面板
@@ -113,7 +111,6 @@ export default {
       if (res.message === 'OK') {
         this.$emit('remove-article', this.artId)
         this.show = false
-        console.log('举报成功!')
         // 举报成功后提示消息
         this.$notify({ type: 'success', message: '举报文章成功', duration: 2000, background: 'red' })
       }

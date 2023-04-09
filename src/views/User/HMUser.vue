@@ -67,13 +67,9 @@ export default {
           message: '确认退出登录'
         })
         .catch(err => {
-          // err为错误的结果cancel
-          console.log(err)
           // 将err return给了confirmResult
           return err
         })
-      // 返回的是一个Promise对象,这里可以使用async和await
-      // console.log(confirmResult)
 
       // 点击取消不执行后续操作
       if (confirmResult === 'cancel') return undefined
