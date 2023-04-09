@@ -1,4 +1,5 @@
 import userRequests from '@/utils/request'
+import axios from 'axios'
 
 // 登陆的api接口
 export const loginAPI = data => {
@@ -24,4 +25,19 @@ export const updateUserProfileAPI = obj => {
 // 修改头像的API(fd表示FormData格式的表单数据)
 export const updateUserAvatarAPI = fd => {
   return userRequests.patch('/v1_0/user/photo', fd)
+}
+
+// 刷新token的API
+// 在请求新 Token 时，不要基于 /src/utils/request.js 模块中的 instance 发起请求，
+// 因为 instance 发起请求时，默认携带的 Authorization 值为 tokenInfo.token 属性！！！
+export const exchangeTokenAPI = refreshToken => {
+  return axios({
+    method: 'PUT',
+    // 这里必须是完整的url地址
+    url: 'http://toutiao.itheima.net/v1_0/authorizations',
+    headers: {
+      // 请求头中携带Authorization身份认证字段
+      Authorization: 'Bearer ' + refreshToken
+    }
+  })
 }
