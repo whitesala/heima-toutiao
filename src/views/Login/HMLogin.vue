@@ -63,12 +63,13 @@ export default {
       if (res.message === 'OK') {
         // 将登陆成功的结果存储到vuex里面
         this.updateTokenInfo(res.data)
-        // 登陆成功后跳转到主页
-        this.$router.push('/home')
+        // 对登录前用户访问的有权限的地址进行保存，如果有访问则保存访问的地址，否则没有访问即this.$route.query.pre为false时则默认为'/'
+        const navPath = this.$route.query.pre || '/'
+        this.$router.replace(navPath)
       }
     }
-  }
 
+  }
 }
 </script>
 

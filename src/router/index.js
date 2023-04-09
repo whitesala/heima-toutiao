@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { myGetItem } from '@/utils/storage'
+// import { myGetItem } from '@/utils/storage'
+import store from '@/store/index'
 
 // 导入的外部的路由组件
 import Login from '@/views/Login/HMLogin.vue'
@@ -61,14 +62,28 @@ const router = new VueRouter({
   }
 })
 
+// 所有需要权限的页面的数组，凡是跳转这些页面都想需要先检验有无权限，无则跳转到登录页面
+const pagePathArr = ['/home', '/home/user', '/user/edit', '/user/chatRobot']
+
 // 全局前置守卫
 router.beforeEach((to, from, next) => {
-  if (to.path === '/home') {
-    const token = myGetItem('state')
-    token ? next() : next('/login')
+  if (pagePathArr.indexOf(to.path) !== -1) {
+    const token = store.state.tokenInfo.token
+    // 没有登录，强制跳转到登录页，并携带路由的 "query 查询参数"
+    token ? next() : next(`/login?pre=${to.fullPath}`)
   } else {
     next()
   }
 })
+
+// 解决vue-Router内部报错问题
+// 将 VueRouter 本身提供的 $router.push 方法转存到常量中
+const originalPush = VueRouter.prototype.push
+// 自定义 $router.push 方法，在内部调用原生的 originalPush 方法进行路由跳转；并通过 .catch 捕获错误
+VueRouter.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject) return originalPush(this, location, onResolve, onReject)
+  // 通过catch捕获错误
+  return originalPush.call(this, location).catch(err => err)
+}
 
 export default router
