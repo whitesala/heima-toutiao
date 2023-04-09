@@ -33,7 +33,12 @@ export default {
       // 当前时间戳
       timestamp: Date.now(),
       // 上拉加载
-      loading: false, // 表示是否正在进行上拉加载的请求,每当触发List组件的上拉加载更多时,List组件会自动将loading设置为true,下一页的数据请求回来后需要手动将其改为false不然下次再出发上拉加载会失效!
+      // key 冲突问题
+      // 一进入 ArtList.vue 组件中，会立即触发 created 生命周期函数，请求文章列表的数据。
+      // 由于 data 中的 loading 值的默认值为 false，因此一进入页面，会立即触发一次 <van-list> 组件的 load 事件
+      // 解决方案：把组件内的 loading 默认值，从 false 重置为 true 即可。
+      // 这样，只通过 created 发起了首页的数据请求，并没有再次使用 <van-list> 额外请求数据。
+      loading: true, // 表示是否正在进行上拉加载的请求,每当触发List组件的上拉加载更多时,List组件会自动将loading设置为true,下一页的数据请求回来后需要手动将其改为false不然下次再出发上拉加载会失效!
       finished: false, // 表示所有数据是否加载完成,false表示还有下一页数据,true表示所有数据加载完毕
       refreshing: false // 是否处于下拉刷新的状态
     }

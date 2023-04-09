@@ -49,6 +49,8 @@
 // 按需导入文章详情页的API
 import { getArticleDetailAPI, setFollowAPI, setUnFollowAPI, setLikeAPI, setDislikeAPI } from '@/api/articleAPI'
 import ArtCmt from '@/components/ArtComment/HMArtComment.vue'
+// 引入highlight.js模块
+import hljs from 'highlight.js'
 
 export default {
   name: 'ArticleDetail',
@@ -66,6 +68,22 @@ export default {
   created() {
     this.initArticleDetail()
   },
+  watch: {
+    id() {
+      // 侦听id值一旦发生变化就清除旧的文章详情列表
+      this.articleDetail = null
+      // 再次发送请求文章详情数据的方法
+      this.initArticleDetail()
+    }
+  },
+
+  // DOM元素加载完成后
+  updated() {
+    // 判断是否有文章的内容
+    // 对文章的内容进行高亮处理
+    if (this.articleDetail) hljs.highlightAll()
+  },
+
   methods: {
     // 请求文章详情页
     async initArticleDetail() {
@@ -121,6 +139,14 @@ export default {
         this.articleDetail.attitude = -1
       }
     }
+  },
+
+  // 声明 beforeRouteLeave 这个组件内的守卫，用来记录当前组件在纵向上滚动的距离
+  beforeRouteLeave(from, to, next) {
+    from.meta.top = window.scrollY
+    setTimeout(() => {
+      next()
+    }, 0)
   }
 }
 </script>

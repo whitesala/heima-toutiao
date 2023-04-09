@@ -29,7 +29,7 @@ export default {
       searchResultList: [],
 
       // 是否正在进行加载
-      loading: true,
+      loading: false,
       // 是否完成所有数据加载
       finished: false
     }
@@ -48,6 +48,16 @@ export default {
     // 调用初始化请求搜索列表的方法
     this.initSearchResultList()
   },
+  watch: {
+    // 实现searchResult组件的状态保持
+    // 侦听kw的变化来动态请求文章的搜索结果
+    kw() {
+      this.page = 1
+      this.searchResultList = []
+      this.loading = false
+      this.finished = false
+    }
+  },
   methods: {
     async initSearchResultList() {
       const { data: res } = await getSearchResultAPI(this.kw, this.page)
@@ -61,6 +71,14 @@ export default {
     onLoad() {
       this.initSearchResultList()
     }
+  },
+
+  // 声明 beforeRouteLeave组件内的守卫，用来记录当前组件在纵向上滚动的距离
+  beforeRouteLeave(from, to, next) {
+    from.meta.top = window.scrollY
+    setTimeout(() => {
+      next()
+    }, 0)
   }
 }
 </script>

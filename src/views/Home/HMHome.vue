@@ -18,7 +18,8 @@
 
     <!-- 分类频道列表 -->
     <!-- v-model绑定active，默认是激活第一个 -->
-    <van-tabs v-model="active" sticky offset-top="1.22666667rem">
+    <!-- :before-change="beforeTabChange"记录标签切换前绑定的事件，这里主要是记录对应Tab对应的滑动位置 -->
+    <van-tabs v-model="active" sticky offset-top="1.22666667rem" :before-change="beforeTabsChange" @change="onTabsChange">
       <van-tab v-for="item in userChannel" :key="item.id" :title="item.name">
 
         <!-- 文章频道列表模块 -->
@@ -113,6 +114,9 @@ import ArtList from '@/components/ArtList/HMArtList.vue'
 import _ from 'lodash'
 // 定义一个fn储存页面移动的距离,初始为空
 const fn = null
+// 用来记录每个频道tab栏对应的滑动的位置
+// 格式对应{'频道': 距离顶部距离}
+const TabNameToTop = {}
 
 export default {
   name: 'HMHome',
@@ -244,6 +248,29 @@ export default {
       // options里的trailing选项,true表示结束后调用
       { trailing: true }
       )
+    },
+
+    // 记录主页频道列表切换的时候滑动的位置
+    beforeTabsChange() {
+      // 获得到当前选中状态（active）的频道
+      const tabName = this.userChannel[this.active].name
+      // 检测当前频道距离滑动的距离
+      TabNameToTop[tabName] = window.scrollY
+
+      // 表示允许进行标签页间的切换，返回Promise
+      // 返回false即阻止标签页间的切换
+      return true
+    },
+
+    // 标签页切换的操作完成后触发该方法
+    onTabsChange() {
+      // 等DOM元素更新完毕后执行相关的操作
+      this.$nextTick(() => {
+        // 获取到切换的标签页的频道名字
+        const tabName = this.userChannel[this.active].name
+        // 使用window.scrollTo()方法进行滚动，如果对应频道的名字先前有记录位置，那么就滚动到对应位置，否则标签页保持在最顶部初始的位置
+        window.scrollTo(0, TabNameToTop[tabName] || 0)
+      })
     }
   },
 

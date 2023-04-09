@@ -39,9 +39,23 @@ const routes = [
   // 搜索组件的路由规则
   { path: '/search', component: Search, name: 'search' },
   // 搜索结果组件的路由规则
-  { path: '/search/:kw', component: SearchResult, name: 'search-result', props: true },
+  {
+    path: '/search/:kw',
+    component: SearchResult,
+    name: 'search-result',
+    props: true,
+    // 用于记录浏览的位置
+    meta: { isRecord: true, top: 0 }
+  },
   // 文章详情页的路由规则
-  { path: '/article/:id', component: ArticleDetail, name: 'article-detail', props: true },
+  {
+    path: '/article/:id',
+    component: ArticleDetail,
+    name: 'article-detail',
+    props: true,
+    // 用于记录浏览的位置
+    meta: { isRecord: true, top: 0 }
+  },
   // 编辑用户信息的组件路由规则
   { path: '/user/edit', component: UserEdit, name: 'user-edit' },
   // 机器人聊天的界面
