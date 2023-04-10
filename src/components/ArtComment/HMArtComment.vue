@@ -111,6 +111,13 @@ export default {
   created() {
     this.initCmtList()
   },
+  watch: {
+    // 侦听文章id的变化，根据不同的文章id渲染不同的文章评论列表
+    artId() {
+      this.cmtList = []
+      this.initCmtList()
+    }
+  },
   methods: {
 
     // 初始化文章评论列表
@@ -155,7 +162,7 @@ export default {
       }
     },
 
-    // 发布文章的监听事件
+    // 发布文章评论的监听事件
     async pubCmt() {
       const { data: res } = await pubCmtAPI(this.artId, this.userCmt)
       if (res.message === 'OK') {

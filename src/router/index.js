@@ -5,7 +5,7 @@ import store from '@/store/index'
 
 // 导入的外部的路由组件
 // 当打包构建应用时，JavaScript 包会变得非常大，影响页面加载。如果我们能把不同路由对应的组件分割成不同的代码块，然后当路由被访问的时候才加载对应组件，这样就会更加高效
-// import Login from '@/views/Login/Login.vue'
+// import Login from '@/views/Login/HMLogin.vue'
 // 对应修改原来导入路由的方式
 const Login = () => import('@/views/Login/HMLogin.vue')
 const Main = () => import('@/views/Main/HMMain.vue')
@@ -30,14 +30,18 @@ const routes = [
     component: Main,
     children: [
       // path 为"空字符串"的子路由规则，叫做"默认子路由"
-      { path: '', component: Home, name: 'home' },
+      {
+        path: '',
+        component: Home,
+        name: 'home',
+        meta: {
+        // 主要的目的是记录进度条与顶部的位置,isRecord没有实际使用意义
+          isRecord: true,
+          top: 0
+        }
+      },
       { path: 'user', component: User, name: 'user' }
-    ],
-    meta: {
-      // 主要的目的是记录进度条与顶部的位置,isRecord没有实际使用意义
-      isRecord: true,
-      top: 0
-    }
+    ]
   },
   // 搜索组件的路由规则
   { path: '/search', component: Search, name: 'search' },
@@ -79,16 +83,30 @@ const router = new VueRouter({
   }
 })
 
+// 全局后置钩子
+router.afterEach((to, from) => {
+  // 如果当前的路由的元信息中，isRecord 的值为 true
+  if (to.meta.isRecord) {
+    setTimeout(() => {
+      // 则把元信息中的 top 值设为滚动条纵向滚动的位置
+      window.scrollTo(0, to.meta.top)
+    }, 0)
+  }
+})
+
 // 所有需要权限的页面的数组，凡是跳转这些页面都想需要先检验有无权限，无则跳转到登录页面
 const pagePathArr = ['/home', '/home/user', '/user/edit', '/user/chatRobot']
 
 // 全局前置守卫
 router.beforeEach((to, from, next) => {
   if (pagePathArr.indexOf(to.path) !== -1) {
+    // 获取store里面的token值
+    // store.state.tokenIbfo要么是空对象要么是登陆后包含{token,refresh_token}的对象
     const token = store.state.tokenInfo.token
-    // 没有登录，强制跳转到登录页，并携带路由的 "query 查询参数"
+    // 需要权限的页面，没有登录，强制跳转到登录页，并携带路由的 "query 查询参数"
     token ? next() : next(`/login?pre=${to.fullPath}`)
   } else {
+    // 访问的是无权限的路由地址直接放行
     next()
   }
 })

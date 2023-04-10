@@ -28,8 +28,8 @@ export const updateUserAvatarAPI = fd => {
 }
 
 // 刷新token的API
-// 在请求新 Token 时，不要基于 /src/utils/request.js 模块中的 instance 发起请求，
-// 因为 instance 发起请求时，默认携带的 Authorization 值为 tokenInfo.token 属性！！！
+// 在请求新 Token 时，不要基于 /src/utils/request.js 模块中的 requests 发起请求，
+// 因为 requests 发起请求时，默认携带的 Authorization 值为 tokenInfo.token 属性！！！
 export const exchangeTokenAPI = refreshToken => {
   return axios({
     method: 'PUT',

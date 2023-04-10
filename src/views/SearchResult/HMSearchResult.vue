@@ -53,9 +53,12 @@ export default {
     // 侦听kw的变化来动态请求文章的搜索结果
     kw() {
       this.page = 1
+      // 侦听到关键词变化后清空原来关键词搜索结果
       this.searchResultList = []
       this.loading = false
       this.finished = false
+      // 重新请求新关键词对应的文章搜索结果列表
+      this.initSearchResultList()
     }
   },
   methods: {
